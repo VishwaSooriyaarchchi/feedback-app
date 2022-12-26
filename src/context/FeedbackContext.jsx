@@ -1,8 +1,9 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const FeedbackContext = createContext();
 
 export const FeedbackProvider = ({ children }) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [iid, setIid] = useState(4);
   const [feedbackEdit, setFeedbackEdit] = useState({
     item: {},
@@ -20,6 +21,21 @@ export const FeedbackProvider = ({ children }) => {
       rating: 8,
     },
   ]);
+
+  useEffect(() => {
+    fetchFeedback();
+  }, []);
+
+  const fetchFeedback = async () => {
+    const response = await fetch(
+      "http://localhost:5000/feedback?_sort=id&_order=desc"
+    );
+    const data = await response.json();
+
+    setFeedback(data);
+    setIsLoading(false);
+  };
+
   const updateFeedback = (id, updItem) => {
     setFeedback(
       feedback.map((item) => (item.id === id ? { ...item, ...updItem } : item))
@@ -49,6 +65,7 @@ export const FeedbackProvider = ({ children }) => {
       value={{
         feedback,
         deleteFeedback,
+        isLoading,
         addFeedback,
         editFeedback,
         feedbackEdit,
