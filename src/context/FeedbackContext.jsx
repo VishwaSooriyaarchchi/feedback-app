@@ -4,32 +4,19 @@ const FeedbackContext = createContext();
 
 export const FeedbackProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [iid, setIid] = useState(4);
+  // const [iid, setIid] = useState(4); in old app this was used to create id for the feedback
   const [feedbackEdit, setFeedbackEdit] = useState({
     item: {},
     edit: false,
   });
-  const [feedback, setFeedback] = useState([
-    {
-      id: 2,
-      text: "this is text from context",
-      rating: 10,
-    },
-    {
-      id: 3,
-      text: "this is 2nd rating from context",
-      rating: 8,
-    },
-  ]);
+  const [feedback, setFeedback] = useState([]);
 
   useEffect(() => {
     fetchFeedback();
   }, []);
 
   const fetchFeedback = async () => {
-    const response = await fetch(
-      "http://localhost:5000/feedback?_sort=id&_order=desc"
-    );
+    const response = await fetch("/feedback?_sort=id&_order=desc");
     const data = await response.json();
 
     setFeedback(data);
@@ -48,11 +35,20 @@ export const FeedbackProvider = ({ children }) => {
       edit: true,
     });
   };
-  const addFeedback = (newFeedback) => {
-    newFeedback.id = iid;
-    setIid(iid + 1);
+  const addFeedback = async (newFeedback) => {
+    const response = await fetch("/feedback", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newFeedback),
+    });
+
+    const data = await response.json();
+    //newFeedback.id = iid;
+    //setIid(iid + 1);
     //console.log(newFeedback);
-    setFeedback([newFeedback, ...feedback]);
+    setFeedback([data, ...feedback]);
   };
   const deleteFeedback = (id) => {
     if (window.confirm("Are you sure want to delete?")) {

@@ -19,6 +19,21 @@
       "id": 5,
       "rating": 10,
       "text": "this is feedback 5 from hjson server"
+    },
+    {
+      "text": "this is a test",
+      "rating": 7,
+      "id": 6
+    },
+    {
+      "text": "this is second tst",
+      "rating": 3,
+      "id": 7
+    },
+    {
+      "text": "this is test 3",
+      "rating": 9,
+      "id": 8
     }
   ]
 }
