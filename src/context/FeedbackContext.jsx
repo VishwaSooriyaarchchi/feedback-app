@@ -47,7 +47,6 @@ export const FeedbackProvider = ({ children }) => {
     const data = await response.json();
     //newFeedback.id = iid;
     //setIid(iid + 1);
-    //console.log(newFeedback);
     setFeedback([data, ...feedback]);
   };
   const deleteFeedback = (id) => {
