@@ -6,16 +6,6 @@
       "text": "this is feedback 1 from hjson server"
     },
     {
-      "id": 2,
-      "rating": 10,
-      "text": "this is feedback 2 from hjson server"
-    },
-    {
-      "id": 4,
-      "rating": 10,
-      "text": "this is feedback 4 from hjson server"
-    },
-    {
       "id": 5,
       "rating": 10,
       "text": "this is feedback 5 from hjson server"
@@ -31,8 +21,8 @@
       "id": 7
     },
     {
-      "text": "this is test 3",
-      "rating": 9,
+      "text": "this is second test modified one",
+      "rating": 8,
       "id": 8
     }
   ]
